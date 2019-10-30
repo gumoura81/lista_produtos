@@ -1,0 +1,147 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+		$(function() {
+		  /**
+		  * NAME: Bootstrap 3 Multi-Level by Johne
+		  * This script will active Triple level multi drop-down menus in Bootstrap 3.*
+		  */
+		  $('li.dropdown-submenu').on('click', function(event) {
+			  event.stopPropagation(); 
+			  if ($(this).hasClass('open')){
+				  $(this).removeClass('open');
+			  }else{
+				  $('li.dropdown-submenu').removeClass('open');
+				  $(this).addClass('open');
+			 }
+		  });
+		});
+		
+		$("#data_inicio").click(function(){					
+				$.ajax({
+						type:"POST",
+						url: "DAO/op_producao.php",
+						data:{
+								acao:'data_inicio',
+								data_inicio:$('input[name="data_inicio"]').val()				
+								
+						},
+						success:function(result){
+							
+						   $('#retorno').append(result); 
+						   
+						}
+					 });//end ajax		
+		})// end insere item
+		$("#fase_pedido").click(function(){					
+					$.ajax({
+							type:"POST",
+							url: "DAO/op_fase_pedido.php",
+							data:{
+							        acao:'escolhe_fase'												
+									
+							},
+							success:function(result){								
+							   $('#retorno').append(result);						   
+							}
+						 });//end ajax		
+            })// end insere item
+		$("#fase_peca").click(function(){					
+					$.ajax({
+							type:"POST",
+							url: "DAO/op_fase_peca.php",
+							data:{
+							        acao:'escolhe_fase_peca'												
+									
+							},
+							success:function(result){								
+							   $('#retorno').append(result); 							   
+							}
+						 });//end ajax		
+            })// end insere item			
+
+	});
+</script>
+
+<div id="subtemplate">	
+
+<style type="text/css">
+ 
+/*Configurações Padrões*/
+ul.menu, .menu li, .menu a{ margin:0; padding:0; list-style:none; text-decoration:none;}
+ul.menu ul{ position:absolute; display:none; }
+ 
+/* Configurações nivel 1*/
+ul.menu{ float:left; font-family:Verdana, Geneva, sans-serif; font-size:15px; border-radius:5px; padding:0 5px;}
+.menu li{ float:left; width:auto; position:relative;}
+.menu li a{ display:block; padding:0 20px; line-height:45px; height:45px; float:left; transition:all 0.1s linear; }
+ 
+/* Configurações nivel 2*/
+.menu li:hover > ul.submenu-1{ display:block; top:45px; left:0; padding:5px; width:200px; border-radius:0 0 5px 5px;   }
+.menu ul.submenu-1 a{  width:200px; padding:0 5px; border-radius:5px;  }
+ 
+/* Configurações nivel 2*/
+.menu li:hover > ul.submenu-2{ display:block; top:0; left:195px; padding:5px; width:400px;  border-radius: 0 5px 5px 5px; }
+.menu ul.submenu-2 a{  width:400px; padding:0 20px; border-radius:5px; }
+ 
+/* Configurações nivel 3*/
+.menu li:hover > ul.submenu-3{ display:block; top:0; left:195px; padding:5px; width:400px;  border-radius: 0 5px 5px 5px; }
+.menu ul.submenu-3 a{  width:400px; padding:0 20px; border-radius:5px; }
+ 
+ 
+/*Configurações de cores*/
+ 
+/*nivel 1*/
+.menu{background:#CCC; }
+.menu a{ color:#000;}
+.menu li:hover > a{ background:#999;  color:#fff;}
+ 
+/*nivel 2*/
+.submenu-1{ background:#999;}
+.submenu-1 a{color:#fff;}
+.submenu-1 li:hover > a{ background:#666; }
+ 
+/*nivel 3*/
+.submenu-2{ background:#666;}
+.submenu-2 a{color:#fff;}
+.submenu-2 li:hover > a{ background:#333; }
+ 
+/*nivel 3*/
+.submenu-3{ background:#333;}
+.submenu-3 a{color:#fff;}
+.submenu-3 li:hover > a{ background:#000; }
+
+body {
+    background-image: url('icone_marcacao/fachada.jpg'); 
+}
+
+/* For devices 400px and larger: */
+@media only screen and (min-device-width: 700px) {
+   body {
+    width: 100%;
+    height: auto;
+    background-image: url('icone_marcacao/fachada.jpg');
+
+    background-size: cover;
+
+}
+ 
+ 
+</style>
+ <div id="retorno"></div>
+ <form action="#" method="post">
+	 <input type="hidden" name="deslogar" value="deslogar">
+	<button type="submit"   style="width: 100%; background-color:black; color:white; height: 50px; opacity: 0.6;" >
+	Usuário Logado: {usuario} - <strong style="color:yellow">Deslogar</strong></button>	 
+	</form> 
+	{empresa}
+	{pedido}	
+    {cadastro}
+	{financeiro}
+	{almoxarifado}
+	{producao}
+	{gerencia}  
+</div>
+    
+
+		
+  

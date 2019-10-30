@@ -1,0 +1,89 @@
+<script>
+$(document).ready(function() {	
+		 // Captura o retorno do retornaCliente.php
+            $.getJSON('DAO/exibe_produto.php', function(data){
+                var produto = [];
+                // Armazena na array capturando somente o nome do cliente
+                $(data).each(function(key, value) {
+                        produto.push(value.produto);
+                });
+                // Chamo o Auto complete do JQuery ui setando o id do input, array com os dados e o mínimo de caracteres para disparar o AutoComplete
+                $('#txtProduto').autocomplete({ source: produto, minLength: 3});
+            });});
+</script>
+<div id="subtemplate">
+<nav class="navbar navbar-inverse">
+        
+</nav>    
+<form action="#" method="post">
+	<div class="row">					
+		   <div class="col-md-2">
+				<label class="control-label" for="selectbasic">Produto</label>					
+				<div class="controls">
+					<input type="text" class="form-control" id="txtProduto"  name="produto">
+				</div>
+		  </div>
+		   <div class="col-md-2">
+				<div class="control-group">
+				  <label class="control-label" for="selectbasic">Grupo Produto</label>
+				  <div class="controls">
+					<select id="selectbasic" name="grupo_produto" class="form-control">
+						<option value=""></option>
+					{lst_grupo}
+					</select>
+				  </div>
+				</div>       
+			 </div> 
+						
+						 
+		   <div class="col-md-2">
+				<label class="control-label" for="selectbasic"></label>					
+				<div class="controls">
+					<input type="hidden" class="form-control"  id="valor" name="pesquisa" value="">
+					<button type="submit" id="gravaItem" class="btn btn-default"> <span class="glyphicon glyphicon-search"></span></button>
+				</div>
+		  </div>
+	</form>	  
+		  
+	</div><!-- end div class row--> 
+  
+
+
+<div class="table-responsive">
+
+    <table id="{tblEditavel}" class="table table-striped table-bordered table-condensed table-hover ">
+        <thead>
+                <tr>					
+					
+                    <th>Código</th>				
+                    <th><p style="width:400px;">Produto</p></th>
+					<th>M2</th>
+					<th><p style="width:100px;">Est Balanço</p></th>
+					<th><p style="width:150px;">Data Balanço</p></th>
+					<th><p style="width:100px;">Est Atual</p></th>
+                    <th>Grupo</th>
+		            <th>Medida</th>
+					<th>Custo</th>
+		            <th><p style="width:100px;">Vl Venda</p></th>
+					<th><p style="width:150px;">Estoque Mínimo</p></th>
+					<th></th>
+                    	
+                </tr>
+        </thead> 
+        
+            {registro}        
+    </table>
+</div>	
+	<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#"></a>
+          </div>
+          <ul class="nav navbar-nav">
+             {paginacao}
+				
+          </ul>
+        </div>
+</nav> 
+</div>
+      
